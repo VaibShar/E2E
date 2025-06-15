@@ -1,17 +1,20 @@
-# Use a Java 17 base image
+# Use Java 17 base image
 FROM eclipse-temurin:17-jdk
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy Gradle files and source code
+# Copy everything to /app
 COPY . .
+
+# Make gradlew executable
+RUN chmod +x gradlew
 
 # Build the project
 RUN ./gradlew build --no-daemon
 
-# Expose default Spring Boot port
+# Expose Spring Boot port
 EXPOSE 8080
 
-# Run the application
+# Run the app
 CMD ["java", "-jar", "build/libs/*.jar"]
