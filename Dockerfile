@@ -4,17 +4,17 @@ FROM eclipse-temurin:17-jdk
 # Set working directory
 WORKDIR /app
 
-# Copy everything to /app
+# Copy all project files
 COPY . .
 
 # Make gradlew executable
 RUN chmod +x gradlew
 
-# Build the project
+# Build the Spring Boot application
 RUN ./gradlew build --no-daemon
 
-# Expose Spring Boot port
+# Expose the app port
 EXPOSE 8080
 
-# Run the app
-CMD ["java", "-jar", "build/libs/*.jar"]
+# Start the Spring Boot app (use exact JAR name)
+CMD ["java", "-jar", "build/libs/BillGenerator-0.0.1-SNAPSHOT.jar"]
